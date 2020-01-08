@@ -1,16 +1,21 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion this.compileSdkVersion
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.java.javaVersion
+        targetCompatibility rootProject.ext.java.javaVersion
     }
 
     buildTypes {
@@ -25,8 +30,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation this.appcompatLibName
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation rootProject.ext.dependence.libSupportV7
+    testImplementation rootProject.ext.dependence.libJunit
+    androidTestImplementation rootProject.ext.dependence.libTestRunner
+    androidTestImplementation rootProject.ext.dependence.libTestEspresso
 }

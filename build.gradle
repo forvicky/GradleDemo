@@ -79,13 +79,15 @@ subprojects { Project project->
 
 }
 
-subprojects { Project project->
-    //扩展Project属性,一个build.gradle对应一个project实体
-    ext{
-        compileSdkVersion=28
-        appcompatLibName='com.android.support:appcompat-v7:28.0.0'
-    }
+//subprojects { Project project->
+//    //扩展Project属性,一个build.gradle对应一个project实体
+//    ext{
+//        compileSdkVersion=28
+//        appcompatLibName='com.android.support:appcompat-v7:28.0.0'
+//    }
+//
+//}
 
-}
+apply from: this.file('common.gradle')
 
 println project('mylibrary').group
