@@ -1,1 +1,1 @@
-"# GradleDemo"
+# GradleDemo
