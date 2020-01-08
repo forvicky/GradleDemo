@@ -58,9 +58,22 @@ dependencies {
 
 println "this is test--"+getRootProject().getRootDir().path
 
-copy{  //文件拷贝以后要手动刷新一下,才会再列表中显示
+//文件拷贝以后要手动刷新一下,才会再列表中显示;只支持同一个工程中操作
+copy{
     from file('build/outputs/apk/')
-    into getRootProject().getRootDir().path+'/apk/'
+    into getRootProject().getRootDir().path+'/output/apk/'
     exclude{}
     rename{}
+}
+
+//文件树遍历
+fileTree('build/outputs/apk/'){FileTree fileTree->
+    fileTree.visit {FileTreeElement element->
+        println 'the file name is:'+element.file.name
+        copy{
+            from element.file
+            into getRootProject().getRootDir().path+'/output/test/'
+        }
+
+    }
 }
