@@ -1,2 +1,5 @@
 include ':app', ':mylibrary'
 rootProject.name='GradleDemo'
+if(hasProperty('isLoadTest')?this.isLoadTest.toBoolean():false){
+    include ':test'
+}
