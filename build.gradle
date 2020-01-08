@@ -91,3 +91,20 @@ subprojects { Project project->
 apply from: this.file('common.gradle')
 
 println project('mylibrary').group
+
+println "getRootDir().absolutePath="+getRootDir().absolutePath
+println "getBuildDir().absolutePath="+getBuildDir().absolutePath
+println "getProjectDir().absolutePath="+getProjectDir().absolutePath
+
+println getContent('common.gradle')
+
+def getContent(String path){
+    try{
+        def file=file(path)   //file()查找当前project下的文件
+        return file.text
+    }catch(GradleException e){
+        println 'file not found...'
+    }
+
+    return null
+}

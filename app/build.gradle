@@ -55,3 +55,12 @@ dependencies {
 
     implementation project(':mylibrary')
 }
+
+println "this is test--"+getRootProject().getRootDir().path
+
+copy{  //文件拷贝以后要手动刷新一下,才会再列表中显示
+    from file('build/outputs/apk/')
+    into getRootProject().getRootDir().path+'/apk/'
+    exclude{}
+    rename{}
+}
