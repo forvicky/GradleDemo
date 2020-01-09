@@ -81,6 +81,16 @@ fileTree('build/outputs/apk/'){FileTree fileTree->
 //直接通过task函数去创建,执行window底下直接gredlew helloTask
 task helloTask(group:'zdd',description:'task study'){
     println 'I am helloTask'
+
+    doFirst{
+        println 'the task group is:'+group
+    }
+
+    //gradle默认的task
+
+    doLast{
+        println 'the task description is:'+description
+    }
 }
 
 //通过TaskContainer去创建Task
@@ -88,6 +98,26 @@ this.tasks.create(name:'helloTask2'){
     setGroup('zdd')
     setDescription('task study')
     println 'I am helloTask2'
+}
+
+//计算build执行时长
+def startBuildTime,endBuildTime
+
+//配置后task才能被找到
+this.afterEvaluate { Project project->
+    def preBuildTask=project.tasks.getByName('preBuild')
+    preBuildTask.doFirst {
+        startBuildTime=System.currentTimeMillis()
+        println 'the start time is:'+startBuildTime
+
+    }
+
+    def buildTask=project.tasks.getByName('build')
+    buildTask.doLast {
+        endBuildTime=System.currentTimeMillis()
+        println "the build time is:${endBuildTime-startBuildTime}"
+    }
+
 }
 
 
