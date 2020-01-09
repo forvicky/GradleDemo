@@ -78,4 +78,16 @@ fileTree('build/outputs/apk/'){FileTree fileTree->
     }
 }
 
+//直接通过task函数去创建,执行window底下直接gredlew helloTask
+task helloTask(group:'zdd',description:'task study'){
+    println 'I am helloTask'
+}
+
+//通过TaskContainer去创建Task
+this.tasks.create(name:'helloTask2'){
+    setGroup('zdd')
+    setDescription('task study')
+    println 'I am helloTask2'
+}
+
 
