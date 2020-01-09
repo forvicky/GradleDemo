@@ -1,4 +1,5 @@
 include ':app', ':mylibrary'
+println '初始化阶段开始...'
 rootProject.name='GradleDemo'
 if(hasProperty('isLoadTest')?this.isLoadTest.toBoolean():false){
     include ':test'

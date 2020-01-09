@@ -39,6 +39,20 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+this.beforeEvaluate {
+    println "配置执行之前..."
+}
+
+this.afterEvaluate {
+    println "配置阶段执行完毕"
+
+}
+
+this.gradle.buildFinished {
+    println "执行阶段执行完毕"
+}
+
+
 this.getProjects()
 
 def getProjects(){
