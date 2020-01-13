@@ -1,3 +1,5 @@
+//初始化阶段执行的就是这个文件
+include 'pluginDemo'
 include ':app', ':mylibrary'
 println '初始化阶段开始...'
 rootProject.name='GradleDemo'

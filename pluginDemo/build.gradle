@@ -1,0 +1,47 @@
+apply plugin:'groovy'
+//添加maven plugin, 用于发布我们的jar
+apply plugin: 'maven'
+
+sourceSets{
+    main{
+        groovy{
+            srcDir 'src/main/groovy'
+        }
+
+        resources{
+            srcDir 'src/main/resources'
+        }
+
+    }
+
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'com.zdd.plugindemo'
+            pom.artifactId = 'testplugin'
+            pom.version = 1.0
+            //文件发布到下面目录
+            repository(url: uri('../repo'))
+        }
+    }
+}
+
+
+compileGroovy {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    options.encoding = "UTF-8"
+}
