@@ -149,4 +149,33 @@ this.afterEvaluate { Project project->
 
 }
 
+//修改最终输出文件的名字，在application中输出就是apk,在library中输出就是aar
+this.afterEvaluate {
+    this.android.applicationVariants.all{ variant->
+        def output=variant.outputs.first()
+        def apkName="app-${variant.baseName}"+"-${variant.versionName}.apk"
 
+        output.outputFileName=apkName
+        println output.outputFile.name
+
+    }
+
+}
+
+
+//如何通过变体获取相关的task，变体是android中重要的概念，只有通过变体才能获取到task
+this.afterEvaluate {
+    this.android.applicationVariants.all{ variant->
+        def task=variant.checkManifest  //比较靠前的任务
+        println task.name
+
+        task.doFirst{
+            println "执行manifest之前"
+        }
+
+        task.doLast{
+            println "执行manifest之后"
+        }
+    }
+
+}

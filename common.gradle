@@ -15,7 +15,7 @@ ext{
                    'keyAlias'     : 'GradleDemo',
                    'keyPassword'  : 'zdd2093419']
 
-    java = ['javaVersion': JavaVersion.VERSION_1_7]
+    java = ['javaVersion': JavaVersion.VERSION_1_8]
 
 
     dependence = ['libSupportV7'      : 'com.android.support:appcompat-v7:28.0.0',
