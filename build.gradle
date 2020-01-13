@@ -1,4 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: this.file('common.gradle')
+apply from:'releaseinfo.gradle'
 
 buildscript {
     //配置工程的仓库地址
@@ -115,7 +117,6 @@ subprojects { Project project->
 //
 //}
 
-apply from: this.file('common.gradle')
 
 println project('mylibrary').group
 
