@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.zdd.plugindemo'
+apply from:'packageplugin.gradle'
 
 buildscript {
     repositories {
@@ -27,6 +28,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+        flavorDimensions rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -51,9 +53,38 @@ android {
         targetCompatibility rootProject.ext.java.javaVersion
     }
 
+    def DEBUG_BASE_URL = "\"http://192.168.1.161:8191/openapi/\""
+
+
+    //***所有的打包变量应该在这边配置
+    productFlavors {
+        develop {
+            //applicaitonId只有在productFlavors中可以配置
+            applicationId rootProject.ext.android.applicationId
+            manifestPlaceholders=[APP_NAME:"开-GradleDemo"]
+            buildConfigField("boolean","LOG_DEBUG","true")
+            buildConfigField("String","API_HOST",DEBUG_BASE_URL)
+        }
+        check {
+            applicationId rootProject.ext.android.applicationId
+            manifestPlaceholders=[APP_NAME:"测-GradleDemo"]
+            buildConfigField("boolean","LOG_DEBUG","true")
+            buildConfigField("String","API_HOST",DEBUG_BASE_URL)
+        }
+
+        product{
+            applicationId rootProject.ext.android.applicationId
+            manifestPlaceholders=[APP_NAME:"GradleDemo"]
+            buildConfigField("boolean","LOG_DEBUG","false")
+            buildConfigField("String","API_HOST",DEBUG_BASE_URL)
+        }
+    }
+
     buildTypes {
         debug {
+            minifyEnabled false
             signingConfig signingConfigs.signDebug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         release {
@@ -61,6 +92,8 @@ android {
             signingConfig signingConfigs.signRelease
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
     }
 
     sourceSets{
@@ -72,6 +105,8 @@ android {
                          'src/main/res-player'] //资源分模块存放
         }
     }
+
+
 }
 
 dependencies {

@@ -2,6 +2,7 @@
 apply from: this.file('common.gradle')
 apply from:'releaseinfo.gradle'
 
+
 buildscript {
     //配置工程的仓库地址
     repositories {
