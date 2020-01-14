@@ -15,7 +15,18 @@ class TestPlugin implements Plugin<Project>{
      * @param project 引入当前插件的Project
      */
     void apply(Project project){
-        println 'Hello Plugin...'+project.name
+        println '这是自定义 Plugin...'+project.name
+
+        //创建扩展属性
+        project.extensions.create('nlpReleaseInfo',
+                ReleaseInfoExtension)
+        //创建Task
+        project.tasks.create('nlpReleaseInfoTask',
+                ReleaseInfoTask)
+
+        //创建Task
+        project.tasks.create('nlpReleaseInfoXmlTask',
+                ReleaseInfoXmlTask)
     }
 
 

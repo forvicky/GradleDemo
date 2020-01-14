@@ -179,3 +179,14 @@ this.afterEvaluate {
     }
 
 }
+
+/**
+ * 为自定义插件传递参数
+ */
+nlpReleaseInfo {
+    versionCode = rootProject.ext.android.versionCode
+    versionName = rootProject.ext.android.versionName
+    versionInfo = '第8个版本。。。'
+    fileDirs = '/release/'
+    fileName = 'releases.xml'
+}
