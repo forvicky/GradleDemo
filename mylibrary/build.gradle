@@ -27,6 +27,9 @@ android {
 
 }
 
+
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -34,4 +37,23 @@ dependencies {
     testImplementation rootProject.ext.dependence.libJunit
     androidTestImplementation rootProject.ext.dependence.libTestRunner
     androidTestImplementation rootProject.ext.dependence.libTestEspresso
+}
+
+task makeJar(type: Copy,group:'nlp'){
+    from('build/intermediates/packaged-classes/release/')
+    into(getRootProject().getRootDir().path+'/app/libs/')
+    include('classes.jar')
+    rename('classes.jar','blesdk-'+rootProject.ext.android.versionName+'.jar')
+}
+
+//配置后task才能被找到
+this.afterEvaluate {
+    tasks.matching {
+        it.name.equals('makeJar')
+
+    }.each{task->
+        task.dependsOn(assemble)
+
+    }
+
 }

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.zdd.plugindemo'
-apply from:'packageplugin.gradle'
+//apply from:'packageplugin.gradle'
 
 buildscript {
     repositories {
